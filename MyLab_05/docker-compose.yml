@@ -41,6 +41,7 @@ services:
     depends_on:
       - db
       - mongo
+      - redis
     command: >
       sh -c "sleep 10 && uvicorn MyLab_05:app --host 0.0.0.0 --port 8000"
     volumes:
