@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     command: >
-      sh -c "python init_db.py && uvicorn MyLab_03:app --host 0.0.0.0 --port 8000"
+      sh -c "uvicorn MyLab_03:app --host 0.0.0.0 --port 8000"
     volumes:
       - .:/app
 
