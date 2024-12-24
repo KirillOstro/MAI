@@ -222,17 +222,6 @@ def load_test_data():
         email="kvostrovskij@mai.education; ",
     )
 
-def wait_for_db(retries=10, delay=5):
-    for _ in range(retries):
-        try:
-            mongo_client.admin.command('ismaster')
-            print("Database is ready!")
-            return
-        except Exception as e:
-            print(f"Database not ready yet: {e}")
-            time.sleep(delay)
-    raise Exception("Could not connect to the database")
-
     db = SessionLocal()
 
     # Проверка существования поездки перед добавлением
@@ -253,7 +242,17 @@ def wait_for_db(retries=10, delay=5):
 
     db.commit()
     db.close()
-
+    
+def wait_for_db(retries=10, delay=5):
+    for _ in range(retries):
+        try:
+            mongo_client.admin.command('ismaster')
+            print("Database is ready!")
+            return
+        except Exception as e:
+            print(f"Database not ready yet: {e}")
+            time.sleep(delay)
+    raise Exception("Could not connect to the database")
 
 # Запуск сервера
 # http://localhost:8000/openapi.json swagger
